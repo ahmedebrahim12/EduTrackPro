@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7C9E5B2F-1A2B-4C3D-8E9F-1A2B3C4D5E6F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>EduTrackPro</RootNamespace>
+    <AssemblyName>EduTrackPro</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <Nullable>enable</Nullable>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AttendanceView.cs" />
+    <Compile Include="Components.cs" />
+    <Compile Include="CoursesView.cs" />
+    <Compile Include="DashboardView.cs" />
+    <Compile Include="DataService.cs" />
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MockCrystalReportViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Models.cs" />
+    <Compile Include="NotificationsView.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="RegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegisterForm.Designer.cs">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportsView.cs" />
+    <Compile Include="SessionsView.cs" />
+    <Compile Include="SettingsView.cs" />
+    <Compile Include="Theme.cs" />
+    <Compile Include="StudentPortal\Main_student.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Main_student.Designer.cs">
+      <DependentUpon>Main_student.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentPortal\Forms\DashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Forms\NotificationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\AlertCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\CoursesUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\DashboardUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\HorizontalCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\NotificationCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\NotificationsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\NotificationsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\ProfileUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\CrystalReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\CrystalReportControl.Designer.cs">
+      <DependentUpon>CrystalReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="StudentPortal\Controls\DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegisterForm.resx">
+      <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentPortal\Main_student.resx">
+      <DependentUpon>Main_student.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentPortal\Controls\AlertCard.resx">
+      <DependentUpon>AlertCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentPortal\Controls\DashboardUserControl.resx">
+      <DependentUpon>DashboardUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentPortal\Controls\HorizontalCard.resx">
+      <DependentUpon>HorizontalCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentPortal\Controls\NotificationCard.resx">
+      <DependentUpon>NotificationCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentPortal\Controls\CrystalReportControl.resx">
+      <DependentUpon>CrystalReportControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentPortal\Controls\CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StudentPortal\Controls\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="StudentPortal\Controls\DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="StudentPortal\Controls\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Oracle.ManagedDataAccess">
+      <Version>21.12.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

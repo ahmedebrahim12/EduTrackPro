@@ -1,0 +1,87 @@
+CREATE TABLE Instructor (
+    InstructorID NUMBER PRIMARY KEY,
+    Name VARCHAR2(100) NOT NULL,
+    Email VARCHAR2(100) UNIQUE,
+    instructorPass VARCHAR2(100) NOT NULL
+);
+CREATE TABLE Course (
+ CourseID NUMBER PRIMARY KEY,
+ CourseName VARCHAR2(100) NOT NULL,
+ InstructorID NUMBER,
+
+ CONSTRAINT fk_course_instructor
+ FOREIGN KEY (InstructorID)
+ REFERENCES Instructor(InstructorID)
+ ON DELETE SET NULL
+);
+CREATE TABLE Student (
+    StudentID NUMBER PRIMARY KEY,
+    Name VARCHAR2(100) NOT NULL,
+    Email VARCHAR2(100) UNIQUE,
+    studentPass VARCHAR2(100) NOT NULL
+);
+CREATE TABLE Enrollment (
+ EnrollmentID NUMBER PRIMARY KEY,
+ StudentID NUMBER,
+ CourseID NUMBER,
+ CONSTRAINT fk_enrollment_student
+ FOREIGN KEY (StudentID)
+ REFERENCES Student(StudentID)
+ ON DELETE CASCADE,
+ CONSTRAINT fk_enrollment_course
+ FOREIGN KEY (CourseID)
+ REFERENCES Course(CourseID)
+ ON DELETE CASCADE,
+ CONSTRAINT uq_enrollment UNIQUE (StudentID, CourseID)
+);
+CREATE TABLE courseSession (
+ SessionID NUMBER PRIMARY KEY,
+ CourseID NUMBER,
+ SessionDate DATE NOT NULL,
+ StartTime VARCHAR2(10),
+ EndTime VARCHAR2(10),
+ CONSTRAINT fk_session_course
+ FOREIGN KEY (CourseID)
+ REFERENCES Course(CourseID)
+ ON DELETE CASCADE
+);
+
+
+CREATE TABLE Attendance (
+    AttendanceID NUMBER PRIMARY KEY,
+    StudentID NUMBER,
+    SessionID NUMBER,
+    Status VARCHAR2(10),
+    MarkedTime DATE,
+    CONSTRAINT fk_attendance_student
+        FOREIGN KEY (StudentID)
+        REFERENCES Student(StudentID)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_attendance_session
+        FOREIGN KEY (SessionID)
+        REFERENCES courseSession(SessionID) 
+        ON DELETE CASCADE,
+    CONSTRAINT chk_status
+        CHECK (Status IN ('Present', 'Absent', 'Late')),
+    CONSTRAINT uq_attendance UNIQUE (StudentID, SessionID)
+);
+
+
+CREATE TABLE Notification (
+    NotificationID NUMBER PRIMARY KEY,
+    RecipientID NUMBER, 
+    Title VARCHAR2(100) NOT NULL,
+    Description VARCHAR2(500) NOT NULL,
+    CourseID NUMBER, 
+    Type VARCHAR2(20), -- (Warning, Info, Success)
+    ActionText VARCHAR2(100), 
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    IsRead NUMBER(1) DEFAULT 0,
+    
+    CONSTRAINT fk_notif_student 
+        FOREIGN KEY (RecipientID) REFERENCES Student(StudentID) ON DELETE CASCADE,
+    CONSTRAINT fk_notif_course 
+        FOREIGN KEY (CourseID) REFERENCES Course(CourseID) ON DELETE SET NULL,
+    CONSTRAINT chk_notif_type 
+        CHECK (Type IN ('Warning', 'Info', 'Success'))
+);

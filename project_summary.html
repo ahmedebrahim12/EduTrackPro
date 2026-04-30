@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTrack Pro - Technical Report</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap');
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f4f7f9;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; text-align: center; }
+        h2 { color: #2980b9; margin-top: 30px; border-right: 5px solid #3498db; padding-right: 15px; }
+        .section { margin-bottom: 25px; }
+        .code-path { background: #ebf5fb; padding: 8px 15px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; color: #2c3e50; font-weight: bold; display: block; margin: 10px 0; }
+        .feature-card { background: #fff; border: 1px solid #e1e8ed; padding: 15px; border-radius: 8px; margin: 10px 0; }
+        .badge { background: #3498db; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.85em; margin-left: 10px; }
+        .footer { text-align: center; margin-top: 40px; font-size: 0.9em; color: #7f8c8d; }
+        ul { padding-right: 20px; }
+        li { margin-bottom: 10px; }
+        .requirement { color: #e67e22; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 تقرير مشروع هندسة البرمجيات - المرحلة الثانية</h1>
+        <p style="text-align: center; color: #7f8c8d;">نظام EduTrack Pro - بوابة المحاضر</p>
+
+        <div class="section">
+            <h2>1. الربط مع قاعدة البيانات (ODP.NET)</h2>
+            <div class="feature-card">
+                <p><span class="requirement">[A.1 & A.2]</span> <strong>الوضع المتصل (Connected Mode):</strong></p>
+                <ul>
+                    <li>تم تطبيق عمليات الـ Select والـ Insert باستخدام الـ Parameters لضمان الأمان.</li>
+                    <li><span class="code-path">File: DataService.cs | Functions: GetCoursesConnected, AddCourseConnected</span></li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <p><span class="requirement">[A.3]</span> <strong>الـ Procedures مع معاملات الخرج (OUT Parameters):</strong></p>
+                <ul>
+                    <li>تم استدعاء Procedure ترجع "رقم" (Number) وهو عدد الطلاب، بدون استخدام RefCursor.</li>
+                    <li><span class="code-path">File: DataService.cs | Function: GetStudentCountByCourseConnected</span></li>
+                    <li><span class="code-path">SQL Proc: GET_STUDENT_COUNT</span></li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <p><span class="requirement">[A.4]</span> <strong>الـ Procedures مع صفوف متعددة (RefCursor):</strong></p>
+                <ul>
+                    <li>تم استخدام الـ SYS_REFCURSOR لجلب قائمة الجلسات بالكامل من المادة.</li>
+                    <li><span class="code-path">File: DataService.cs | Function: GetSessionsByProcedureConnected</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2. الوضع غير المتصل (Disconnected Mode)</h2>
+            <div class="feature-card">
+                <p><span class="requirement">[B.1 & B.2]</span> <strong>استخدام DataAdapter & CommandBuilder:</strong></p>
+                <ul>
+                    <li>تم بناء التقارير باستخدام الـ DataAdapter لملء الـ DataTable.</li>
+                    <li>تم تطبيق ميزة التحديث التلقائي للبيانات باستخدام الـ CommandBuilder.</li>
+                    <li><span class="code-path">File: DataService.cs | Functions: GetAttendanceReport, UpdateCourseDisconnected</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. نظام التنبيهات (Notification System)</h2>
+            <div class="feature-card">
+                <ul>
+                    <li>النظام يراقب غيابات الطلاب برمجياً ويرسل تنبيه "Warning" عند الغياب الثالث.</li>
+                    <li>التنبيه مرتبط بـ RecipientID لضمان ظهوره في لوحة تحكم الطالب (Student Dashboard).</li>
+                    <li><span class="code-path">File: DataService.cs | Function: SaveAttendanceConnected</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4. خريطة الملفات البرمجية</h2>
+            <ul>
+                <li><strong>DataService.cs:</strong> يحتوي على كل الـ Business Logic والتعامل مع قاعدة البيانات.</li>
+                <li><strong>procedures.sql:</strong> يحتوي على تعريفات الـ Procedures في Oracle.</li>
+                <li><strong>full_setup.sql:</strong> يحتوي على هيكل الجداول والـ Constraints.</li>
+                <li><strong>DashboardView.cs:</strong> واجهة الإحصائيات والتنبيهات الديناميكية.</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>تم إعداد هذا التقرير آلياً لتوثيق المرحلة الثانية من مشروع EduTrack Pro</p>
+            <p>2026 © فريق عمل هندسة البرمجيات</p>
+        </div>
+    </div>
+</body>
+</html>
