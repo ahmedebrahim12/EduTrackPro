@@ -52,6 +52,7 @@ namespace EduTrackPro
 
         // Buttons
         internal Button SignUpButton;
+        internal Button btnBackToLogin;
         internal new Button CancelButton;
         private Button btnClose;
 
@@ -105,7 +106,7 @@ namespace EduTrackPro
             // ── Right panel ──────────────────────────────────────────────────
             panelRight = new Panel { Size = new Size(580, 600), Location = new Point(380, 0), BackColor = Color.FromArgb(15, 23, 42) };
 
-            panelCard = new Panel { Size = new Size(480, 520), Location = new Point(50, 40), BackColor = Color.FromArgb(30, 41, 59) };
+            panelCard = new Panel { Size = new Size(480, 560), Location = new Point(50, 20), BackColor = Color.FromArgb(30, 41, 59) };
             panelCard.Paint += (s, e) =>
             {
                 var g = e.Graphics; g.SmoothingMode = SmoothingMode.AntiAlias;
@@ -186,14 +187,21 @@ namespace EduTrackPro
             };
             SignUpButton.Click += new EventHandler(this.SignUpButton_Click);
 
-            // Back to Sign In
-            lblHave   = MakeLbl("Already have an account?", new Font("Segoe UI", 9), Color.FromArgb(148, 163, 184), new Point(28, 480), true);
-            lblHave.Location = new Point(28, 484);
-            lblSignIn = MakeLbl("Sign In", new Font("Segoe UI", 9, FontStyle.Bold | FontStyle.Underline),
-                Color.FromArgb(99, 102, 241), new Point(200, 484), true);
-            lblSignIn.Cursor = Cursors.Hand;
-            lblSignIn.Name   = "lblSignIn";
-            lblSignIn.Click += new EventHandler(this.CancelButton_Click);
+            // Back to Login Button
+            btnBackToLogin = new Button
+            {
+                Text = "← Back to Login",
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                ForeColor = Color.FromArgb(148, 163, 184),
+                FlatStyle = FlatStyle.Flat,
+                FlatAppearance = { BorderSize = 1, BorderColor = Color.FromArgb(71, 85, 105) },
+                Size = new Size(424, 40),
+                Location = new Point(28, 510),
+                Cursor = Cursors.Hand,
+                Name = "btnBackToLogin",
+                UseVisualStyleBackColor = false
+            };
+            btnBackToLogin.Click += new EventHandler(this.CancelButton_Click);
 
             // Hidden CancelButton (kept for code compatibility)
             CancelButton = new Button { Visible = false, Name = "CancelButton" };
@@ -219,7 +227,7 @@ namespace EduTrackPro
                 lblEmailLbl, panelEmailBox,
                 lblPassLbl, panelPassBox,
                 lblConPassLbl, panelConPassBox,
-                SignUpButton, lblHave, lblSignIn,
+                SignUpButton, btnBackToLogin,
                 CancelButton
             });
             panelRight.Controls.Add(panelCard);
