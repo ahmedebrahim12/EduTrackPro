@@ -48,7 +48,8 @@ namespace EduTrackPro.StudentPortal
                 ShowView(dashboardView, btnDashboard);
         }
 
-        // ── Navigation ───────────────────────────────────────────────────────
+        // Sidebar Navigation
+
         private void ShowView(UserControl view, Button active)
         {
             this.contentPanel.Controls.Clear();
@@ -62,7 +63,8 @@ namespace EduTrackPro.StudentPortal
         private void BtnNotifications_Click(object sender, EventArgs e) => ShowView(notificationsView, btnNotifications);
         private void BtnReports_Click(object sender, EventArgs e)       { reportsView.LoadStudentAttendanceReport(currentStudentId); ShowView(reportsView, btnReports); }
 
-        // ── Sidebar Styling ──────────────────────────────────────────────────
+        // Styling for Sidebar buttons
+
         private void StyleNormal(Button b)
         {
             b.BackColor = Color.White;
@@ -108,7 +110,8 @@ namespace EduTrackPro.StudentPortal
         private void btnReports_MouseEnter(object sender, EventArgs e)       => HoverEnter(btnReports, btnReports, reportsView);
         private void btnReports_MouseLeave(object sender, EventArgs e)       => HoverLeave(btnReports, reportsView);
 
-        // ── Logout ───────────────────────────────────────────────────────────
+        // Logout Functionality
+
         private void BtnLogout_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show(

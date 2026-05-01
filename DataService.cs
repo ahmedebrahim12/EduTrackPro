@@ -132,16 +132,15 @@ namespace EduTrackPro.Data
             if (TryConnect())
             {
                 try {
-                    string sql = @"SELECT s.StudentID, s.Name FROM Student s 
-                                 JOIN Enrollment e ON s.StudentID = e.StudentID 
-                                 WHERE e.CourseID = :cid";
+                    string sql = @"SELECT StudentID, Name FROM Student 
+                                 WHERE StudentID IN (SELECT StudentID FROM Enrollment WHERE CourseID = :cid)";
                     OracleCommand cmd = new OracleCommand(sql, conn);
                     cmd.BindByName = true;
                     cmd.Parameters.Add("cid", courseId);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                            dt.Rows.Add(reader.GetInt32(0), reader.GetString(1), "Present");
+                    using (var reader = cmd.ExecuteReader()) {
+                        while (reader.Read()) {
+                            dt.Rows.Add(Convert.ToInt32(reader["StudentID"]), reader["Name"].ToString(), "Undefined");
+                        }
                     }
                 } catch (Exception ex) {
                     System.Windows.Forms.MessageBox.Show("Error getting students for attendance: " + ex.Message);
@@ -243,14 +242,19 @@ namespace EduTrackPro.Data
                         nextId = Convert.ToInt32(cmdId.ExecuteScalar());
                     }
 
+                    var processedStudents = new HashSet<int>();
                     foreach (DataRow row in attendanceData.Rows)
                     {
+                        int stid = Convert.ToInt32(row["StudentID"]);
+                        if (processedStudents.Contains(stid)) continue;
+                        processedStudents.Add(stid);
+
                         OracleCommand cmd = new OracleCommand("INSERT INTO Attendance (AttendanceID, SessionID, StudentID, Status) VALUES (:aid, :sid, :stid, :stat)", conn);
                         cmd.BindByName = true;
                         cmd.Parameters.Add("aid", nextId++);
                         cmd.Parameters.Add("sid", sessionId);
-                        cmd.Parameters.Add("stid", row["StudentID"]);
-                        cmd.Parameters.Add("stat", row["Status"]);
+                        cmd.Parameters.Add("stid", stid);
+                        cmd.Parameters.Add("stat", row["Status"].ToString());
                         cmd.ExecuteNonQuery();
                     }
                     new OracleCommand("COMMIT", conn).ExecuteNonQuery();

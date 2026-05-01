@@ -61,35 +61,30 @@ namespace EduTrackPro.StudentPortal.Controls
                     if (rowCount > 0)
                     {
                         CrystalReport1 cr = new CrystalReport1();
-                        
-                        // 1. Pass the whole dataset (this is more reliable)
                         cr.SetDataSource(ds);
 
-                        // 2. Clear all connection info
+                        var emptyConnInfo = new CrystalDecisions.Shared.ConnectionInfo
+                        {
+                            AllowCustomConnection = true,
+                            IntegratedSecurity = false,
+                            ServerName = "",
+                            DatabaseName = "",
+                            UserID = "",
+                            Password = ""
+                        };
+
+                        var tableLogOnInfos = new CrystalDecisions.Shared.TableLogOnInfos();
                         foreach (CrystalDecisions.CrystalReports.Engine.Table table in cr.Database.Tables)
                         {
-                            CrystalDecisions.Shared.TableLogOnInfo logOnInfo = table.LogOnInfo;
-                            logOnInfo.ConnectionInfo.ServerName = ""; 
-                            logOnInfo.ConnectionInfo.DatabaseName = "";
-                            logOnInfo.ConnectionInfo.UserID = "";
-                            logOnInfo.ConnectionInfo.Password = "";
+                            var logOnInfo = table.LogOnInfo;
+                            logOnInfo.ConnectionInfo = emptyConnInfo;
                             table.ApplyLogOnInfo(logOnInfo);
+                            tableLogOnInfos.Add(logOnInfo);
                         }
 
-                        // 3. Force empty credentials
-                        cr.SetDatabaseLogon("", "");
-
-                        // 4. If the report has a parameter named "p_id" or "studentId", fill it
-                        foreach (ParameterFieldDefinition def in cr.DataDefinition.ParameterFields)
-                        {
-                            if (def.Name.ToLower().Contains("id"))
-                            {
-                                cr.SetParameterValue(def.Name, studentId);
-                            }
-                        }
-                        
+                        // Apply to viewer
+                        crystalReportViewer1.LogOnInfo = tableLogOnInfos;
                         crystalReportViewer1.ReportSource = cr;
-                        crystalReportViewer1.RefreshReport();
                     }
                     else
                     {

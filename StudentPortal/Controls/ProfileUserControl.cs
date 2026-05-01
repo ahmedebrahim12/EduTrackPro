@@ -24,7 +24,8 @@ namespace EduTrackPro.StudentPortal.Controls
             this.Controls.Clear();
             int id = _studentId > 0 ? _studentId : Main_student.currentStudentId;
 
-            // ── Fetch data ────────────────────────────────────────────────────
+            // Fetch student data from database
+
             string name   = "Unknown Student";
             string email  = "N/A";
             int    total  = 0;
@@ -74,7 +75,8 @@ namespace EduTrackPro.StudentPortal.Controls
                 ? $"{name[0]}{secondInitial}"
                 : name.Substring(0, 1).ToUpper();
 
-            // ─── UI ───────────────────────────────────────────────────────────
+            // Setup UI Components
+
             // Scrollable content
             var scroll = new Panel
             {

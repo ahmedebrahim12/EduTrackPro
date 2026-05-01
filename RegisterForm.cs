@@ -23,7 +23,7 @@ namespace EduTrackPro
             textBoxConPass.PasswordChar = '*';
         }
 
-        // ── Stub handlers kept for designer compatibility ────────────────────
+        // Designer compatibility stubs
         private void label1_Click(object sender, EventArgs e) { }
         private void label2_Click(object sender, EventArgs e) { }
         private void label3_Click(object sender, EventArgs e) { }
@@ -33,7 +33,7 @@ namespace EduTrackPro
         private void textBoxPass_TextChanged(object sender, EventArgs e) { }
         private void textBoxConPass_TextChanged(object sender, EventArgs e) { }
 
-        // ── Sign Up ──────────────────────────────────────────────────────────
+        // Sign Up Action Logic
         private void SignUpButton_Click(object sender, EventArgs e)
         {
             // Validation

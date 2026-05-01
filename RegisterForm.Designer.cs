@@ -70,7 +70,8 @@ namespace EduTrackPro
         {
             this.SuspendLayout();
 
-            // ── Form ─────────────────────────────────────────────────────────
+            // Main Form Settings
+
             this.ClientSize      = new Size(960, 600);
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition   = FormStartPosition.CenterScreen;
@@ -80,7 +81,8 @@ namespace EduTrackPro
             this.DoubleBuffered  = true;
             this.Load           += new EventHandler(this.RegisterForm_Load);
 
-            // ── Left branding panel ──────────────────────────────────────────
+            // Sidebar / Branding
+
             panelLeft = new Panel { Size = new Size(380, 600), Location = new Point(0, 0), BackColor = Color.Transparent };
             panelLeft.Paint += (s, e) =>
             {
@@ -103,7 +105,8 @@ namespace EduTrackPro
             lblF3 = MakeFeatureLbl("✓  Get instant notifications", 306);
             panelLeft.Controls.AddRange(new Control[] { lblBrand, lblBrandSub, lblF1, lblF2, lblF3 });
 
-            // ── Right panel ──────────────────────────────────────────────────
+            // Registration Form Controls
+
             panelRight = new Panel { Size = new Size(580, 600), Location = new Point(380, 0), BackColor = Color.FromArgb(15, 23, 42) };
 
             panelCard = new Panel { Size = new Size(480, 560), Location = new Point(50, 20), BackColor = Color.FromArgb(30, 41, 59) };
@@ -235,7 +238,8 @@ namespace EduTrackPro
             this.ResumeLayout(false);
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────────
+        // Form UI Helpers
+
         private void SelectRole(string role)
         {
             selectedRole = role;

@@ -44,7 +44,8 @@ namespace EduTrackPro
         {
             this.SuspendLayout();
 
-            // ── Form ─────────────────────────────────────────────────────────
+            // Form configuration
+
             this.ClientSize        = new Size(900, 540);
             this.FormBorderStyle   = FormBorderStyle.None;
             this.StartPosition     = FormStartPosition.CenterScreen;
@@ -54,7 +55,8 @@ namespace EduTrackPro
             this.DoubleBuffered    = true;
             this.Load             += new EventHandler(this.LoginForm_Load);
 
-            // ── Left branding panel ──────────────────────────────────────────
+            // Left side design
+
             panelLeft = new Panel
             {
                 Size      = new Size(420, 540),
@@ -107,7 +109,8 @@ namespace EduTrackPro
             panelLeft.Controls.AddRange(new Control[]
                 { lblBrand, lblBrandSub, lblFeature1, lblFeature2, lblFeature3 });
 
-            // ── Right login card ─────────────────────────────────────────────
+            // Login controls
+
             panelRight = new Panel
             {
                 Size      = new Size(480, 540),
@@ -307,7 +310,8 @@ namespace EduTrackPro
             this.ResumeLayout(false);
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────────
+        // Helper functions
+
         private Label MakeFeatureLbl(string text, int y) => new Label
         {
             Text      = text,

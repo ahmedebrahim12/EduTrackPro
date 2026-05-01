@@ -78,7 +78,8 @@ namespace EduTrackPro.StudentPortal.Controls
             flowCourses.Controls.Clear();
             int id = _studentId > 0 ? _studentId : Main_student.currentStudentId;
 
-            // ── Oracle query (from marawn) ───────────────────────────────────
+            // Load course data using Oracle ODP.NET
+
             List<(int courseId, string name, int present, int total)> courses
                 = new List<(int, string, int, int)>();
             try
