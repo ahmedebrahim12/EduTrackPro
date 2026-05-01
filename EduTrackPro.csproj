@@ -59,6 +59,18 @@
     <Compile Include="CoursesView.cs" />
     <Compile Include="DashboardView.cs" />
     <Compile Include="DataService.cs" />
+    <Compile Include="InstructorReport\CrystalReport_Inst.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport_Inst.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="InstructorReport\Inst_CrystalReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InstructorReport\Inst_CrystalReport.Designer.cs">
+      <DependentUpon>Inst_CrystalReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +154,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="InstructorReport\CrystalReport_Inst.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport_Inst.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstructorReport\Inst_CrystalReport.resx">
+      <DependentUpon>Inst_CrystalReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
