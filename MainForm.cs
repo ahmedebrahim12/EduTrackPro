@@ -106,22 +106,35 @@ namespace EduTrackPro
             AddNavItem("Take Attendance", y += 55, () => new AttendanceView());
             AddNavItem("Notifications", y += 55, () => new NotificationsView());
             AddNavItem("Reports", y += 55, () => new ReportsView());
-            AddNavItem("Settings", y += 55, () => new SettingsView());
 
             // Logout button pinned to bottom of sidebar
             var btnLogout = new Button
             {
-                Text = "⏻  Logout",
-                TextAlign = ContentAlignment.MiddleLeft,
+                Text = "Logout",
+                TextAlign = ContentAlignment.MiddleCenter,
                 FlatStyle = FlatStyle.Flat,
-                FlatAppearance = { BorderSize = 0 },
-                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                FlatAppearance = { BorderSize = 0, MouseOverBackColor = Color.FromArgb(200, 35, 50) },
+                Font = new Font("Segoe UI", 11, FontStyle.Bold),
                 ForeColor = Color.White,
                 BackColor = Color.FromArgb(220, 53, 69),
-                Size = new Size(220, 48),
-                Location = new Point(0, 720),
+                Size = new Size(200, 45),
+                Location = new Point(30, 640),
                 Cursor = Cursors.Hand,
                 Anchor = AnchorStyles.Bottom | AnchorStyles.Left
+            };
+            
+            // Add rounded corners to the button
+            btnLogout.Paint += (s, e) => {
+                var g = e.Graphics; g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                using (var path = new System.Drawing.Drawing2D.GraphicsPath()) {
+                    int r = 10;
+                    path.AddArc(0, 0, r, r, 180, 90);
+                    path.AddArc(btnLogout.Width - r, 0, r, r, 270, 90);
+                    path.AddArc(btnLogout.Width - r, btnLogout.Height - r, r, r, 0, 90);
+                    path.AddArc(0, btnLogout.Height - r, r, r, 90, 90);
+                    path.CloseFigure();
+                    btnLogout.Region = new Region(path);
+                }
             };
             btnLogout.Click += (s, e) =>
             {

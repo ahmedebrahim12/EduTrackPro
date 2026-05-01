@@ -1,7 +1,0 @@
-CR for Visual Studio SP39 32b installer (VS 2019 and below)
-
-
-https://origin.softwaredownloads.sap.com/public/site/index.html
-
-
-Download the 32-bit EXE version only! 

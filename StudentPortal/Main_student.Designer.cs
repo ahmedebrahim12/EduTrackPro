@@ -152,11 +152,11 @@ namespace EduTrackPro.StudentPortal
             this.btnLogout.FlatStyle              = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.ForeColor              = System.Drawing.Color.White;
             this.btnLogout.Font                   = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnLogout.Location               = new System.Drawing.Point(16, 560);
+            this.btnLogout.Location               = new System.Drawing.Point(16, 520);
             this.btnLogout.Name                   = "btnLogout";
             this.btnLogout.Size                   = new System.Drawing.Size(188, 45);
             this.btnLogout.TabIndex               = 5;
-            this.btnLogout.Text                   = "⏻  Logout";
+            this.btnLogout.Text                   = "Logout";
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
 
